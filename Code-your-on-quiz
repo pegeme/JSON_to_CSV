@@ -1,0 +1,96 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+# IPND Stage 2 Final Project - Peter-Georg Merkel
+
+# You've built a Mad-Libs game with some help from Sean.
+# Now you'll work on your own game to practice your skills and demonstrate what you've learned.
+
+# For this project, you'll be building a Fill-in-the-Blanks quiz.
+# Your quiz will prompt a user with a paragraph containing several blanks.
+# The user should then be asked to fill in each blank appropriately to complete the paragraph.
+# This can be used as a study tool to help you remember important vocabulary!
+
+# Note: Your game will have to accept user input so, like the Mad Libs generator,
+# you won't be able to run it using Sublime's `Build` feature.
+# Instead you'll need to run the program in Terminal or IDLE.
+# Refer to Work Session 5 if you need a refresher on how to do this.
+
+# To help you get started, we've provided a sample paragraph that you can use when testing your code.
+# Your game should consist of 3 or more levels, so you should add your own paragraphs as well!
+#
+#sample = '''A ___1___ is created with the def keyword. You specify the inputs a ___1___ takes by
+#adding ___2___ separated by commas between the parentheses. ___1___s by default return ___3___ if you
+#don't specify the value to return. ___2___ can be standard data types such as string, number, dictionary,
+#tuple, and ___4___ or can be more complicated such as objects and lambda functions.'''
+
+# The answer for ___1___ is 'function'. Can you figure out the others?
+
+# We've also given you a file called fill-in-the-blanks.pyc which is a working version of the project.
+# A .pyc file is a Python file that has been translated into "byte code".
+# This means the code will run the same as the original .py file, but when you open it
+# it won't look like Python code! But you can run it just like a regular Python file
+# to see how your code should behave.
+
+# Hint: It might help to think about how this project relates to the Mad Libs generator you built with Sean.
+# In the Mad Libs generator, you take a paragraph and replace all instances of NOUN and VERB.
+# How can you adapt that design to work with numbered blanks?
+
+# List containing the text and the necessary answers 
+text_easy = "Old McDonald __1__ a farm E I E I O. And on his __2__ he had a cow E I E I O.\n"\
+             "With a __3__ moo here and a moo moo there here a moo, there a moo everywhere a moo moo.\n"\
+             "__4__ McDonald had a farm E I E I O."
+list_easy = ["had", "farm", "moo", "old"]
+
+text_medium = "Old McDonald had a __1__ E I E I O. And on his farm he had a __2__ E I E I O.\n"\
+               "With a oink __3__ here and a oink oink there here a oink, __4__ a oink everywhere a oink oink.\n"\
+               "Old McDOnald had a farm E I E I O"
+list_medium = ["farm", "pig", "oink", "there"]
+
+text_heavy = "Old McDonald had __1__ farm E I E I O. And __2__ his __3__ he had a duck E I E I O.\n"\
+             "With a __4__ quack here and a quack quack there here a quack, there a quack everywhere a quack quack.\n"\
+             "Old McDOnald had a farm E I E I O"
+list_heavy = ["a", "on", "farm", "quack"]
+
+# Variable text/answer to facilitate access
+quiz_data = {
+    'easy': {'text': text_easy, 'list': list_easy, 'tries': 5},
+    'medium': {'text': text_medium, 'list': list_medium, 'tries': 4},
+    'heavy': {'text': text_heavy, 'list': list_heavy, 'tries': 3}
+}
+# Replace answer / __number__ and check tries of mistake input
+# noinspection PyUnresolvedReferences
+def play_question_answer(text, index, solution, text_pos, tries):
+    marker = "__{}__".format(index + 1)
+    while True:  
+        intake = raw_input(text + ": ")
+        print(intake)
+        if intake == solution:
+            return text.replace(marker, solution)
+        else:
+            tries = tries - 1
+            if tries == 0:
+                return False
+
+# Start quiz, check answers, limit users intake
+def start_quiz(quiz):
+    result = quiz['text']
+    for i in range(len(quiz['list'])):
+        result = play_question_answer(result, i, quiz['list'][i], i, quiz['tries'])
+        if result == False:
+            print("Please enter the correct answer!")
+            return
+
+# Choose level and start quiz, break out with exit
+# noinspection PyUnresolvedReferences
+def main():
+    while True:
+        intake_level = raw_input("please, choose one Level: easy, medium oder heavy: ")
+        if intake_level == 'easy' or intake_level == 'medium' or intake_level == 'heavy':
+            start_quiz(quiz_data[intake_level])
+        elif intake_level == 'exit':
+            exit()
+        else:
+            continue
+    
+if __name__ == '__main__':
+    main()
