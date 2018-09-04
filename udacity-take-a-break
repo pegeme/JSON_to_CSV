@@ -1,0 +1,67 @@
+'''
+1. Install Python on Your Computer
+Here are both the Windows and Mac instructions to get up and running with Python. (If you already have Python installed, go ahead and skip to step 3.)
+
+How to install Python on Windows
+How to install Python on a Mac
+
+2. Open IDLE and Create a New File
+Once you have Python installed, open IDLE. IDLE is the name of the place where you can write Python code. Open it on your computer.
+
+On Windows: Go to Start -> Programs -> Python -> Idle
+On a Mac: Type “Idle” in Spotlight
+
+Create a new file by selecting: File -> New Window
+
+3. Save and Run Your Program
+The first thing we need to learn is to open a web browser with a YouTube URL. The following code does exactly that.
+
+import webbrowser
+
+webbrowser.open("http://www.youtube.com/watch?v=YXw16RzMofo")
+Save the program; call it takeabreak.py. Now run the program: Run -> Run Module
+
+The YouTube video should open. Try changing the URL to your favorite video.
+
+4. Set Your Time for Your Video to Open
+The next step is to set the amount of time before the video opens. Here’s how to make that happen.
+
+import time
+import webbrowser
+
+time.sleep(10)
+webbrowser.open("http://www.youtube.com/watch?v=YXw16RzMofo")
+Now run this. The program should now wait 10 seconds before launching the browser. Play around with the number of seconds. For example, 2 hours = 7,200 seconds.
+
+5. Add a Loop to Your Reminder
+As a final step, let’s add a loop to launch the browser multiple times during the day.
+
+import time
+import webbrowser
+
+total_breaks = 3
+break_count = 0
+
+while(break_count < total_breaks):
+    time.sleep(10)
+    webbrowser.open("http://www.youtube.com/watch?v=YXw16RzMofo")
+    break_count = break_count + 1
+That’s it! Show your program to a friend, and to learn more, head over to the Programming Foundations with Python course.
+
+
+'''
+
+import webbrowser
+import time
+
+breaks = 3
+count = 0
+
+#print("startet um" + time.ctime())
+
+
+while (count < breaks):
+    time.sleep(5)
+    webbrowser.open("http:www.spiegel.de")
+    breaks = breaks - 1
+exit()
